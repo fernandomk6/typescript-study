@@ -58,4 +58,21 @@ module.exports.readFile = function (f) {
 };
 ```
 
+## Modificando literais de objetos
+Em typescript, objetos literais não podem ter métodos ou propriedades atribuídos a ele
+que não esteja na sua declaração literal.
 
+```typescript
+/** @type {{a: number}} */
+var obj = { a: 1 };
+obj.b = 2;
+Property 'b' does not exist on type '{ a: number; }'.
+```
+
+## Vinicializadores de array nulos, indefinidos e vazios são do tipo any ou any[]
+Qualquer variável inicializada com null ou undefined, terá o tipo any ou any[].
+Qualquer variável inicializada com [] terá o valor any[].
+
+## Os parâmetros da função são opcionais por padrão
+Em typescript você deve passar os mesmos paramêtros que a função espera receber.
+Você também pode definir algum parametro como opcional.
