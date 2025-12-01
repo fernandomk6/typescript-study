@@ -3,11 +3,25 @@
 ## Primitive types in typescript
 
 All primitive types
-- Boolean
-- Number
-- String
-- Null
-- Undefined
+- string: Texto
+- number: Números
+- boolean: Verdadeiro ou falso
+- null: Vazio intencional
+- undefined: Valor não definido
+- bigint: Inteiros gigantes
+- symbol: Valor único
+- void: Sem retorno
+- never: Nunca ocorre
+- any: Desativa tipagem (Evite)
+- unknown: Tipo desconhecido (seguro)
+
+## Dica profissional
+
+Sempre prefira:
+✅ unknown ao invés de any
+✅ Tipagem explícita
+✅ Verificações de tipo (typeof, instanceof)
+❌ Evitar any
 
 ---
 ### Exemples
@@ -38,14 +52,14 @@ const myCarColor = "Blue";
 const message = `Hi! My name is ${myName} and i have a ${myCarColor} car!`
 ```
 
-3. BigInt
+4. BigInt
 Representa números inteiros muito grandes
 ```ts
 const bigNumber: bigint = 9007199254740991n;
 const hugeNumber = BigInt(9007199254740991); // Sintaxe alternativa
 ```
 
-4. Symbols
+5. Symbols
 Cria identificadores únicos
 ```ts
 const uniqueKey: symbol = Symbol('description');
@@ -54,4 +68,44 @@ const obj = {
 }
 
 console.log(obj[uniqueKey]); // 'This is a unique property'
+```
+
+6. Void
+```ts
+function logar(): void {
+  console.log("Logando...");
+}
+```
+
+7. Never
+```ts
+function erroFatal(): never {
+  throw new Error("Erro");
+}
+```
+
+8. Any
+⚠️ Uso: deve ser evitado. Desativa o TypeScript.
+```ts
+let variavel: any = 10;
+variavel = "texto";
+variavel = true;
+```
+
+9. Unknown
+⚠️ Uso: mais seguro que any. Requer verificação de tipo.
+Uso: quando você não sabe o tipo ainda, mas quer segurança.
+```ts
+let valorDesconhecido: unknown = 10;
+valorDesconhecido = "texto";
+```
+
+10. Undefined
+```ts
+let indefinido: undefined = undefined;
+```
+
+11. Null
+```ts
+let nulo: null = null;
 ```
