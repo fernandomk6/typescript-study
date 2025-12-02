@@ -108,10 +108,66 @@ explícito com os tipos ode tornar seu código mais fácil de manter,
 especialmente em bases de código maiores ou APIs públicas.
 
 ## Segurança de digitação em ação
-uma das principais vantagens do typescript é a detecção de erros
+Uma das principais vantagens do typescript é a detecção de erros
 relacionados a tipos durante o desenvolvimento.
 
 Vamos analisar como o typescript ajuda a evitar erros comuns.
 
 ## Erros de incompatibilidade de tipo
+```ts
+// Incompatibilidade de tipo explicita
+let username: string = 'Alice';
+username = 42; // Error: Type 'number' is not assignable to type 'string'
 
+// Incompatibilidade de tipo implicita
+let score = 100;
+score = 'high'; // Error: Type 'string' is not assignable to type 'number'
+```
+
+## Javascript vs Typescript
+Em javascript o seguinte código seria executado sem erros, o que poderia
+causar bugs.
+```js
+function add (a, b) {
+    return a + b;
+}
+
+console.log(add('5', 3)); // Returns '53' (string concatenation)
+```
+
+O Typescript detecta esse problema em tempo de compilação
+```ts
+function add (a: number, b: number): number {
+    return a + b;
+}
+
+console.log(add('5', 3)); // Error: Argument of type 'string' is not assignable to parameter of type 'number'
+```
+
+## Quando o typescript não consegue inferir tipos
+Embora a inferência de tipos seja poderosa, há casos em que ela não consegue 
+determinar o tipo corretamente.
+
+Nessas situações, o typescript recorre ao any tipo padrão, o que desativa a 
+verificação de tipos.
+
+## Casos comuns para any
+```ts
+// 1. JSON.parse returns 'any' because the structure ins't known at compile time
+const data = JSON.parse('{ "name": "Alice", "age": 30 }');
+
+// 2. Variables declared without initialization
+let something; // Type is 'any'
+something = 'Hello';
+something = 42; // No error
+```
+
+**Evite any sempre que possível**
+
+Quando você usa any, a verificação de tipos do typescript é desativada.
+
+Em vez disso considere essas alternativas:
+- Use anotações de tipo
+- Criar interfaces para objetos complexos
+- Use verificação de tipos para verificações de tipos em tempo de execução
+- Habilite `noImplicitAny` em seu tsconfig.json
