@@ -15,4 +15,10 @@ console.log(person.name)
 
 // Asserção não muda o valor
 // Só funciona quando o tipo da match
+// Exemplo
+
+const name: unknown = 'Fernando';
+const fernando = name as int;
+
+
 ```
